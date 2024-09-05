@@ -4,16 +4,15 @@ import dev.quarris.findit.network.FindItemPayload;
 import dev.quarris.findit.network.RequestItemSearchPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
@@ -28,6 +27,8 @@ public class FindItMod {
         modEventBus.addListener(this::registerKeymapping);
         NeoForge.EVENT_BUS.addListener(this::clickInScreen);
         NeoForge.EVENT_BUS.addListener(this::cacheLastHoveredItem);
+
+        modContainer.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
     }
 
     public void registerKeymapping(RegisterKeyMappingsEvent event) {

@@ -1,6 +1,7 @@
 package dev.quarris.findit.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.quarris.findit.Config;
 import dev.quarris.findit.ModRef;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -39,13 +40,17 @@ public class ClientEventHandler {
         poseStack.pushPose();
         poseStack.translate(-camera.getPosition().x, -camera.getPosition().y, -camera.getPosition().z);
 
-        int counter = FindManager.getCounter();
+        int counter = FindManager.getTimer();
+
         float alpha = counter < 20 ? counter / 20f : 1;
+        float red = Config.outlineColor >> 16 & 0xff;
+        float green = Config.outlineColor >> 8 & 0xff;
+        float blue = Config.outlineColor & 0xff;
 
         for (BlockPos pose : FindManager.getPoses()) {
             BlockState state = level.getBlockState(pose);
             VoxelShape shape = state.getShape(level, pose).move(pose.getX(), pose.getY(), pose.getZ());
-            LevelRenderer.renderVoxelShape(poseStack, buffer.getBuffer(RenderTypes.lines()), shape, 0, 0, 0, 1, 0.5f, 1, alpha, true);
+            LevelRenderer.renderVoxelShape(poseStack, buffer.getBuffer(RenderTypes.lines()), shape, 0, 0, 0, red / 0xff, green / 0xff, blue / 0xff, alpha, true);
         }
 
         poseStack.popPose();

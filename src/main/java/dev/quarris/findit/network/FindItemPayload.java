@@ -27,8 +27,7 @@ public record FindItemPayload(List<BlockPos> positions) implements CustomPacketP
 
     public static void handlePayload(final FindItemPayload payload, final IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
-            Level level = ctx.player().level();
-            FindManager.setPoses(payload.positions, level.getGameTime());
+            FindManager.setPoses(payload.positions);
         });
     }
 

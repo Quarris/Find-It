@@ -19,6 +19,7 @@ public class ModRef {
 
     public static class Constants {
         public static final int FIND_DISTANCE = 32;
+        public static final int MAX_COUNTER = 100;
     }
 
 }

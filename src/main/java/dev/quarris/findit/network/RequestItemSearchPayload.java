@@ -38,12 +38,12 @@ public record RequestItemSearchPayload(ResourceLocation itemName) implements Cus
                 Item item = BuiltInRegistries.ITEM.get(payload.itemName());
                 ServerPlayer player = (ServerPlayer) ctx.player();
                 Set<BlockPos> poses = new HashSet<>();
-                int chunkOffset = Math.ceilDiv(ModRef.Constants.FIND_DISTANCE, 16);
+                int chunkOffset = Math.ceilDiv(ModRef.FIND_DISTANCE, 16);
                 for (int chunkX = -chunkOffset; chunkX <= chunkOffset; chunkX++) {
                     for (int chunkZ = -chunkOffset; chunkZ <= chunkOffset; chunkZ++) {
                         for (Map.Entry<BlockPos, BlockEntity> entry : player.serverLevel().getChunk(player.chunkPosition().x + chunkX, player.chunkPosition().z + chunkZ).getBlockEntities().entrySet()) {
                             BlockPos pos = entry.getKey();
-                            if (player.distanceToSqr(pos.getCenter()) > ModRef.Constants.FIND_DISTANCE * ModRef.Constants.FIND_DISTANCE) {
+                            if (player.distanceToSqr(pos.getCenter()) > ModRef.FIND_DISTANCE * ModRef.FIND_DISTANCE) {
                                 continue;
                             }
 

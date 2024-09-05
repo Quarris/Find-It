@@ -31,7 +31,12 @@ public class Config {
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
     {
+        reload();
+    }
+
+    public static void reload() {
         outlineColor = OUTLINE_COLOR.getAsInt();
         outlineTimer = OUTLINE_TIMER.getAsInt();
+
     }
 }

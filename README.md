@@ -1,28 +1,16 @@
+![Preview of finding items by pressing 'Y', default keybind](https://i.imgur.com/GZKhxAe.gif)
 
-Installation information
-=======
+# Find It
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions at [github](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+Find It allows you to find items you want in nearby inventories around you. Simply press 'Y' (Default keybind) on any item in your inventory (or JEI or similar) and look around for all the highlighted storage around you!
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+## Config:
+Client sided config that allows you to change the colour of the highlight as well as how long it will appear for. Accessible via your usual config files or changable in game using commands.
 
-> **Note**: For Eclipse, use tasks in `Launch Group` instead of ones founds in `Java Application`. A preparation task must run before launching the game. NeoGradle uses launch groups to do these subsequently.
+### Colour
+Changes the colour of the highlight.  
+`/findit color <red> <green> <blue>` where the red, green and blue values are between 0 and 255.
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
-
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license, if you do not agree with it you can change your mapping names to other crowdsourced names in your 
-build.gradle. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
-
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+### Timer
+Changes the time the higlight is shown for.  
+`/findit timer <time>` where time is the amount of ticks the highlight is displayed for, between 10 and 300.

@@ -2,8 +2,17 @@ plugins {
     id 'java-library'
     id 'eclipse'
     id 'idea'
+
+    // Publishing plugins
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.142'
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id 'com.modrinth.minotaur' version '2.+'
+
+    id 'net.neoforged.gradle.userdev' version '7.0.163'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
 }
 
 version = mod_version
@@ -14,7 +23,7 @@ repositories {
 }
 
 base {
-    archivesName = mod_id
+    archivesName = "${mod_id}-${minecraft_version}"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
@@ -78,7 +87,8 @@ repositories {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+
+    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -124,4 +134,32 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+
+var changelogText = file('changelog.md').exists() ? file('changelog.md').text : ""
+curseforge {
+    project {
+        apiKey = System.getenv('CURSEFORGE_API_PUBLISH')
+        id = curseforge_id
+        changelog = changelogText
+        changelogType = "markdown"
+        releaseType = release_type
+        addGameVersion minecraft_version // Add the Minecraft versions you're targeting
+        addGameVersion "NeoForge" // Add the Minecraft versions you're targeting
+
+        mainArtifact(jar) {
+            displayName = "$mod_name v$project.version"
+        }
+    }
+}
+
+modrinth {
+    token = System.getenv('MODRINTH_API_PUBLISH')
+    projectId = modrinth_id
+    versionNumber = project.version
+    versionName = "$mod_name v$project.version"
+    versionType = release_type
+    uploadFile = jar
+    gameVersions = [minecraft_version] // Add the Minecraft versions you're targeting
+    changelog = changelogText
 }

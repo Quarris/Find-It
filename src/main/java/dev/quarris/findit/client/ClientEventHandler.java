@@ -39,7 +39,7 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public static void clickInScreen(ScreenEvent.KeyPressed.Pre event) {
-        if (ClientRef.SEARCH_KEY.get().matches(event.getKeyCode(), event.getScanCode())) {
+        if (Minecraft.getInstance().level != null && ClientRef.SEARCH_KEY.get().matches(event.getKeyCode(), event.getScanCode())) {
             if (Minecraft.getInstance().level.getGameTime() - lastCheckTime < 2) {
                 Minecraft.getInstance().getConnection().send(new RequestItemSearchPayload(BuiltInRegistries.ITEM.getKey(lastStack.getItem())));
             }

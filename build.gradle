@@ -211,5 +211,6 @@ modrinth {
     versionType = release_type
     uploadFile = jar
     gameVersions = [minecraft_version] // Add the Minecraft versions you're targeting
+    loaders = ["neoforge"]
     changelog = changelogText
 }

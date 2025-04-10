@@ -148,7 +148,7 @@ curseforge {
         addGameVersion "NeoForge" // Add the Minecraft versions you're targeting
 
         mainArtifact(jar) {
-            displayName = "$mod_name v$project.version"
+            displayName = "$mod_name v$project.version ($minecraft_version)"
         }
     }
 }
@@ -157,7 +157,7 @@ modrinth {
     token = System.getenv('MODRINTH_API_PUBLISH')
     projectId = modrinth_id
     versionNumber = project.version
-    versionName = "$mod_name v$project.version"
+    versionName = "$mod_name v$project.version ($minecraft_version)"
     versionType = release_type
     uploadFile = jar
     gameVersions = [minecraft_version] // Add the Minecraft versions you're targeting

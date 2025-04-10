@@ -9,6 +9,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.ShapeRenderer;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -76,7 +77,7 @@ public class ClientEventHandler {
         for (BlockPos pose : FindManager.getPoses()) {
             BlockState state = level.getBlockState(pose);
             VoxelShape shape = state.getShape(level, pose).move(pose.getX(), pose.getY(), pose.getZ());
-            LevelRenderer.renderVoxelShape(poseStack, buffer.getBuffer(RenderTypes.lines()), shape, 0, 0, 0, red / 0xff, green / 0xff, blue / 0xff, alpha, true);
+            ShapeRenderer.renderLineBox(poseStack, buffer.getBuffer(RenderTypes.lines()), shape.bounds(), red / 0xff, green / 0xff, blue / 0xff, alpha);
         }
 
         poseStack.popPose();

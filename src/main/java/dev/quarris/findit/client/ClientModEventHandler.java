@@ -5,10 +5,15 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = ModRef.ID, bus = EventBusSubscriber.Bus.MOD)
 public class ClientModEventHandler {
 
+    @SubscribeEvent
+    public static void registerRenderPipelines(RegisterRenderPipelinesEvent event) {
+        event.registerPipeline(RenderTypes.LINES_PIPELINE);
+    }
 
     @SubscribeEvent
     public static void registerKeymapping(RegisterKeyMappingsEvent event) {
